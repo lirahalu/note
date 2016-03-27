@@ -1,0 +1,256 @@
+如何清除图片下方出现几像素的空白间隙？
+方法1：
+img{display:block;}
+方法2：
+img{vertical-align:top;}
+除了top值，还可以设置为text-top | middle | bottom | text-bottom，甚至特定的<length>和<percentage>值都可以
+方法3：
+#test{font-size:0;line-height:0;}
+#test为img的父元素
+如何让文本垂直对齐文本输入框？
+方法：
+input{vertical-align:middle;}
+如何让单行文本在容器内垂直居中？
+方法：
+#test{height:25px;line-height:25px;}
+只需设置文本的行高等于容器的高度即可
+如何让超链接访问后和访问前的颜色不同且访问后仍保留hover和active效果？
+方法：
+a:link{color:#03c;}
+
+a:visited{color:#666;}
+
+a:hover{color:#f30;}
+
+a:active{color:#c30;}
+按L-V-H-A的顺序设置超链接样式即可，可速记为LoVe（喜欢）HAte（讨厌）
+为什么Standard mode下IE无法设置滚动条的颜色？
+方法：
+html{
+
+	scrollbar-3dlight-color:#999;
+
+	scrollbar-darkshadow-color:#999;
+
+	scrollbar-highlight-color:#fff;
+
+	scrollbar-shadow-color:#eee;
+
+	scrollbar-arrow-color:#000;
+
+	scrollbar-face-color:#ddd;
+
+	scrollbar-track-color:#eee;
+
+	scrollbar-base-color:#ddd;
+
+}
+将原来设置在body上的滚动条颜色样式定义到html标签选择符上即可
+如何使文本溢出边界不换行强制在一行内显示？
+方法：
+#test{width:150px;white-space:nowrap;}
+设置容器的宽度和white-space为nowrap即可，其效果类似<nobr>标签
+如何使文本溢出边界显示为省略号？
+方法（此方法Firefox5.0尚不支持）：
+#test{width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+首先需设置将文本强制在一行内显示，然后将溢出的文本通过overflow:hidden截断，并以text-overflow:ellipsis方式将截断的文本显示为省略号。
+如何使连续的长字符串自动换行？
+方法：
+#test{width:150px;word-wrap:break-word;}
+word-wrap的break-word值允许单词内换行
+如何清除浮动？
+方法1：
+#test{clear:both;}
+#test为浮动元素的下一个兄弟元素
+方法2：
+#test{display:block;zoom:1;overflow:hidden;}
+#test为浮动元素的父元素。zoom:1也可以替换为固定的width或height
+方法3：
+#test{zoom:1;}
+
+#test:after{display:block;clear:both;visibility:hidden;height:0;content:'';}
+#test为浮动元素的父元素
+如何定义鼠标指针的光标形状为手型并兼容所有浏览器？
+方法：
+#test{cursor:pointer;}
+若将cursor设置为hand，将只有IE和Opera支持，且hand为非标准属性值
+如何让已知高度的容器在页面中水平垂直居中？
+方法：
+#test{position:absolute;top:50%;left:50%;width:200px;height:200px;margin:-100px 0 0 -100px;}
+Know More：已知高度的容器如何在页面中水平垂直居中
+如何让未知尺寸的图片在已知宽高的容器内水平垂直居中？
+方法：
+#test{display:table-cell;*display:block;*position:relative;width:200px;height:200px;text-align:center;vertical-align:middle;}
+
+#test p{*position:absolute;*top:50%;*left:50%;margin:0;}
+
+#test p img{*position:relative;*top:-50%;*left:-50%;vertical-align:middle;}
+#test是img的祖父节点，p是img的父节点。Know More：未知尺寸的图片如何水平垂直居中
+如何设置span的宽度和高度（即如何设置内联元素的宽高）？
+方法：
+span{display:block;width:200px;height:100px;}
+要使内联元素可以设置宽高，只需将其定义为块级或者内联块级元素即可。所以方法非常多样，既可以设置display属性，也可以设置float属性，或者position属性等等。
+如何给一个元素定义多个不同的css规则？
+方法：
+.a{color:#f00;}
+
+.b{background:#eee;}
+
+.c{background:#ccc;}
+
+
+
+<div class="a b">测试1</div>
+
+<div class="a c">测试2</div>
+多个规则之间使用空格分开，并且只有class能同时使用多个规则，id不可以
+如何让某个元素充满整个页面？
+方法：
+html,body{height:100%;margin:0;}
+
+#test{height:100%;}
+如何让某个元素距离窗口上右下左4边各10像素？
+方法：
+html,body{height:100%;margin:0;}
+
+html{_padding:10px;}
+
+#test{position:absolute;top:10px;right:10px;bottom:10px;left:10px;_position:static;_height:100%;}
+如何去掉超链接的虚线框？
+方法：
+a{outline:none;}
+IE7及更早浏览器由于不支持outline属性，需要通过js的blur()方法来实现，如<a onfocus="this.blur();"...
+如何容器透明，内容不透明？
+方法1：
+.outer{width:200px;height:200px;background:#000;filter:alpha(opacity=20);opacity:.2;}
+
+.inner{width:200px;height:200px;margin-top:-200px;}
+
+					
+
+<div class="outer"><!--我是透明的容器--></div>
+
+<div class="inner">我是不透明的内容</div>
+原理是容器层与内容层并级，容器层设置透明度，内容层通过负margin或者position绝对定位等方式覆盖到容器层上
+方法2：
+.outer{width:200px;height:200px;background:rgba(0,0,0,.2);background:#000\9;filter:alpha(opacity=20)\9;}
+
+.outer .inner{position:relative\9;}
+
+					
+
+<div class="outer">
+
+	<div class="inner">我是不透明的内容</div>
+
+</div>
+高级浏览器直接使用rgba颜色值实现；IE浏览器在定义容器透明的同时，让子节点相对定位，也可达到效果
+如何让整个页面水平居中？
+方法：
+body{text-align:center;}
+
+#test2{width:960px;margin:0 auto;text-align:left;}
+定义body的text-align值为center将使得IE5.5也能实现居中
+为什么容器的背景色没显示出来？为什么容器无法自适应内容高度？
+方法：
+清除浮动，方法请参考本页第9条
+通常出现这样的情况都是由于没有清除浮动而引起的，所以Debug时应第一时间想到是否有未清除浮动的地方
+如何做1像素细边框的table？
+方法1：
+#test{border-collapse:collapse;border:1px solid #ddd;}
+
+#test th,#test td{border:1px solid #ddd;}
+
+
+
+<table id="test">
+
+	<tr><th>姓名</th><td>Joy Du</td></tr>
+
+	<tr><th>年龄</th><td>26</td></tr>
+
+</table>
+方法2：
+#test{border-spacing:1px;background:#ddd;}
+
+#test tr{background:#fff;}
+
+
+
+<table id="test" cellspacing="1">
+
+	<tr><th>姓名</th><td>Joy Du</td></tr>
+
+	<tr><th>年龄</th><td>26</td></tr>
+
+</table>
+IE7及更早浏览器不支持border-spacing属性，但是可以通过table的标签属性cellspacing来替代。
+如何使页面文本行距始终保持为n倍字体大小的基调？
+方法：
+body{line-height:n;}
+注意，不要给n加单位。Know More：如何使页面文本行距始终保持为n倍字体大小的基调
+标准模式Standard mode和怪异模式Quirks mode下的盒模型区别？
+方法：
+标准模式下：Element width = width + padding + border
+
+怪异模式下：Element width = width
+相关资料请参阅CSS3属性box-sizing
+以图换字的几种方法及优劣分析
+思路1：使用text-indent的负值，将内容移出容器
+.test1{width:200px;height:50px;text-indent:-9999px;background:#eee url(*.png) no-repeat;}
+
+
+
+<div class="test">以图换字之内容负缩进法</div>
+该方法优点在于结构简洁，不理想的地方：1.由于使用场景不同，负缩进的值可能会不一样，不易抽象成公用样式；2.当该元素为链接时，在非IE下虚线框将变得不完整；3.如果该元素被定义为内联级或者内联块级，不同浏览器下会有较多的差异
+思路2：使用display:none或visibility:hidden将内容隐藏；
+.test{width:200px;height:50px;background:#eee url(*.png) no-repeat;}
+
+.test span{visibility:hidden;/* 或者display:none */}
+
+
+
+<div class="test"><span>以图换字之内容隐藏法</span></div>
+该方法优点在于兼容性强并且容易抽象成公用样式，缺点在于结构较复杂
+思路3：使用padding或者line-height将内容挤出容器之外；
+.test{overflow:hidden;width:200px;height:0;padding-top:50px;background:#eee url(*.png) no-repeat;}
+
+.test{overflow:hidden;width:200px;height:50px;line-height:50;background:#eee url(*.jpg) no-repeat;}
+
+
+
+<div class="test">以图换字之内容排挤法</div>
+该方法优点在于结构简洁，缺点在于：1.由于使用场景不同，padding或line-height的值可能会不一样，不易抽象成公用样式；2.要兼容IE5.5及更早浏览器还得hack
+思路4：使用超小字体和文本全透明法；
+.test{overflow:hidden;width:200px;height:50px;font-size:0;line-height:0;color:rgba(0,0,0,0);background:#eee url(*.png) no-repeat;}
+
+
+
+<div class="test">以图换字之超小字体+文本全透明法</div>
+该方法结构简单易用，推荐使用
+为什么2个相邻div的margin只有1个生效？
+方法：
+.box1{margin:10px 0;}
+
+.box2{margin:20px 0;}
+
+
+
+<div class="box1">box1</div>
+
+<div class="box2">box2</div>
+本例中box1的底部margin为10px，box2的顶部margin为20px，但表现在页面上2者之间的间隔为20px，而不是预想中的10+20px=30px，结果是选择2者之间最大的那个margin，我们把这种机制称之为“外边距合并”；外边距合并不仅仅出现在相邻的元素间，父子间同样会出现。
+简单列举几点注意事项: 
+　外边距合并只出现在块级元素上； 
+　浮动元素不会和相邻的元素产生外边距合并； 
+　绝对定位元素不会和相邻的元素产生外边距合并； 
+　内联块级元素间不会产生外边距合并； 
+　根元素间不会不会产生外边距合并（如html与body间）； 
+　设置了属性overflow且值不为visible的块级元素不会与它的子元素发生外边距合并；
+如何在文本框中禁用中文输入法？
+方法：
+input,textarea{ime-mode:disabled;}
+ime-mode为非标准属性，写该文档时只有IE和Firefox支持
+如何解决列表中list-style-image不能精准定位的问题？
+方法：
+不使用list-style-image来定义列表项目标记符号，而用background-image来代替，并通过background-position来进行定位
